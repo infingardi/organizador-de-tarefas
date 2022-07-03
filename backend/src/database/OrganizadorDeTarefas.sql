@@ -21,5 +21,3 @@ CREATE TABLE tasks (
         REFERENCES users (id)
         ON DELETE CASCADE
 ) ENGINE=INNODB;
-
-INSERT INTO users (name, password, email) VALUES ('igor', 'olá mundo', 'infingardi@gmail.com') 
