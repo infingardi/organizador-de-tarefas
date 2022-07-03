@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  api:
+    build: ./backend
+    image: node:alpine
+    volumes:
+      - ./backend:/app
+    ports:
+      - 3333:3333
+    depends_on:
+      - database
+  
+  database:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=docker
+    ports:
+      - 3306:3306
+  
+  web:
+    build: ./frontend
+    image: node:alpine
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
