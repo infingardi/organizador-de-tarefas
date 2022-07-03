@@ -15,7 +15,17 @@ const getTaskById = async (id) => {
   return response;
 };
 
+const createTask = async ({ userId, title, statusId }) => {
+  const [response] = await connection
+    .execute(`
+      INSERT INTO OrganizadorDeTarefas.tasks
+      (user_id, title, status_id) VALUES (?, ?, ?)`, [userId, title, statusId]);
+
+  return response;
+};
+
 module.exports = {
   getAllTasks,
   getTaskById,
+  createTask,
 };
