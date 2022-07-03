@@ -1,5 +1,6 @@
 const connection = require('./connection');
 
+// Vai ser necessário listar todas as tarefas de um user especifico
 const getAllTasks = async () => {
   const [response] = await connection.execute('SELECT * FROM OrganizadorDeTarefas.tasks');
 
@@ -25,7 +26,7 @@ const createTask = async ({ userId, title, statusId }) => {
 const updateTask = async ({ id, title, statusId }) => {
   const [response] = await connection
     .execute(`UPDATE OrganizadorDeTarefas.tasks
-      SET title=?, statusId=? WHERE id=?`, [title, statusId, id]);
+      SET title=?, status_id=? WHERE id=?`, [title, statusId, id]);
 
   return response;
 };
