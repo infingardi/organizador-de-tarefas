@@ -21,3 +21,6 @@ CREATE TABLE tasks (
         REFERENCES users (id)
         ON DELETE CASCADE
 ) ENGINE=INNODB;
+
+ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'docker';
+flush privileges;
