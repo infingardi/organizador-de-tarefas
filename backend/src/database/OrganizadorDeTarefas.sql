@@ -10,7 +10,12 @@ CREATE TABLE users (
     name VARCHAR(30) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL
-) ENGINE=INNODB;
+);
+
+CREATE TABLE statusTask (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    status_name VARCHAR(80) NOT NULL
+);
 
 CREATE TABLE tasks (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -21,16 +26,12 @@ CREATE TABLE tasks (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id)
         REFERENCES users (id)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
     FOREIGN KEY (status_id)
         REFERENCES statusTask (id)
         ON DELETE CASCADE
-) ENGINE=INNODB;
+);
 
-CREATE TABLE statusTask (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    status_name VARCHAR(80) NOT NULL
-) ENGINE=INNODB;
 
 INSERT INTO statusTask (status_name)
     VALUES ('pendente'), ('em andamento'), ('pronto');
