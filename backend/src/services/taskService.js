@@ -18,8 +18,15 @@ const createTask = async ({ userId, title, statusId }) => {
   return task;
 };
 
+const updateTask = async ({ id, title, statusId }) => {
+  const task = await taskModel.updateTask({ id, title, statusId });
+
+  return task;
+};
+
 module.exports = {
   getAllTasks,
   getTaskById,
   createTask,
+  updateTask,
 };
