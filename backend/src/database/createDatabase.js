@@ -6,9 +6,9 @@ const restoreDb = async () => {
 
   // Faz a conexão com o banco de dados
   const importer = new Importer({
-    user: MYSQL_USER,
-    password: MYSQL_PASSWORD,
-    host: MYSQL_HOST,
+    user: MYSQL_USER || 'root',
+    password: MYSQL_PASSWORD || 'password',
+    host: MYSQL_HOST || 'localhost',
   });
   // Executa as Queries do arquivo selecionado
   await importer.import('./src/database/OrganizadorDeTarefas.sql');
