@@ -30,9 +30,18 @@ const updateTask = async ({ id, title, statusId }) => {
   return response;
 };
 
+const deleteTask = async ({ id }) => {
+  const [response] = await connection
+    .execute(`DELETE FROM OrganizadorDeTarefas.tasks
+      WHERE id=?`, [id]);
+
+  return response;
+};
+
 module.exports = {
   getAllTasks,
   getTaskById,
   createTask,
   updateTask,
+  deleteTask,
 };
