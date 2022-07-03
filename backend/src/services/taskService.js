@@ -6,4 +6,13 @@ const getAllTasks = async () => {
   return tasks;
 };
 
-module.exports = { getAllTasks };
+const getTaskById = async (id) => {
+  const task = await taskModel.getTaskById(id);
+
+  return task;
+};
+
+module.exports = {
+  getAllTasks,
+  getTaskById,
+};
