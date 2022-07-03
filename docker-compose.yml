@@ -3,26 +3,37 @@ version: '3.1'
 services:
   api:
     build: ./backend
-    image: node:alpine
-    volumes:
-      - ./backend:/app
+    container_name: backend
     ports:
       - 3333:3333
     depends_on:
       - database
-  
+    environment:
+      - PORT=3333
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=docker
+      - MYSQL_DATABASE=OrganizadorDeTarefas
+      - MYSQL_PORT=3306
+
+    volumes:
+      - ./backend:/app
+
   database:
     image: mysql:5.7
     restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=docker
+    container_name: mysql
     ports:
       - 3306:3306
-  
+    environment:
+      - MYSQL_ROOT_PASSWORD=docker
+
   web:
     build: ./frontend
-    image: node:alpine
+    container_name: frontend
     ports:
       - 3000:3000
+    volumes:
+      - ./frontend:/app
     depends_on:
       - api
