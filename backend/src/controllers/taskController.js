@@ -13,7 +13,7 @@ const getAllTasks = async (req, res) => {
 const getTaskById = async (req, res) => {
   try {
     const { id } = req.params;
-    const task = await taskService.getTasksById(id);
+    const task = await taskService.getTaskById(id);
 
     return res.status(200).json(task);
   } catch (error) {
