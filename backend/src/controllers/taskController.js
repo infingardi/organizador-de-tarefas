@@ -45,7 +45,7 @@ const updateTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     const task = await taskService.deleteTask({ id });
 
     return res.status(204).json(task);
