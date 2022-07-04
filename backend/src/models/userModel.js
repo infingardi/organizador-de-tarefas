@@ -1,4 +1,5 @@
 const connection = require('./connection');
+const generateToken = require('../utils/generateToken');
 
 const verifyUserExists = async (email) => {
   const [response] = await connection
@@ -26,8 +27,11 @@ const loginUser = async ({ email, password }) => {
   if (user.length === 0) throw new Error('senha ou email incorreto');
   if (user.password !== password) throw new Error('senha ou email incorreto');
 
-  // realizar geração de token
-  return 'logado';
+  // Gera token sem a chave password
+  delete user.password;
+  const token = generateToken({ user });
+
+  return { token };
 };
 
 module.exports = {
