@@ -1,5 +1,6 @@
 // Importações
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 
 const router = require('./src/routes');
@@ -7,6 +8,8 @@ const router = require('./src/routes');
 // Iniciando o express
 const app = express();
 app.use(express.json());
+
+app.use(cors());
 
 // Iniciando as rotas
 app.use(router.taskRouter);
