@@ -8,9 +8,9 @@ const getError = (error, res) => {
   try {
     const erro = JSON.parse(error.message);
 
-    return res.status(erro.code).json({ message: error.message });
+    return res.status(erro.code).json({ message: erro.message });
   } catch (err) {
-    return res.status(500).json({ message: 'problem not yet identified' });
+    return res.status(500).json({ message: error });
   }
 };
 
