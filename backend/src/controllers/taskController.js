@@ -2,7 +2,8 @@ const taskService = require('../services/taskService');
 
 const getAllTasks = async (req, res) => {
   try {
-    const tasks = await taskService.getAllTasks();
+    const { userId } = req.body;
+    const tasks = await taskService.getAllTasks(userId);
 
     return res.status(200).json(tasks);
   } catch (error) {
