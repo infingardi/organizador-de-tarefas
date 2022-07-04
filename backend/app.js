@@ -1,11 +1,15 @@
 // bibliotecas
 const express = require('express');
+const cors = require('cors');
 const connection = require('./src/models/connection');
 require('dotenv').config();
 
 // iniciando o express
 const app = express();
 app.use(express.json());
+
+app.use(cors());
+
 // selecionando a porta que ira rodar
 const PORT = process.env.PORT || 3333;
 
