@@ -1,17 +1,59 @@
+/* eslint-disable no-alert */
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Signup() {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const verifyName = () => {
+    const verify = name.length > 2;
+
+    if (!verify) alert('name must be at least 3 characters long');
+
+    return verify;
+  };
+
+  const verifyEmail = () => {
+    const verify = /\S+@\S+\.\S+/;
+
+    if (!verify.test(email)) alert('Must be a valid email');
+
+    return verify.test(email);
+  };
+
+  const verifyPassword = () => {
+    const verify = password.length >= 6;
+
+    if (!verify) alert('Password must be at least 6 characters long');
+
+    return verify;
+  };
+
+  const verifyUser = () => {
+    const vn = verifyName();
+    const ve = verifyEmail();
+    const vp = verifyPassword();
+
+    return vn && ve && vp;
+  };
 
   const handleSubmit = async (e) => {
     const url = 'http://localhost:3333/signup';
     e.preventDefault();
 
-    const response = await axios.post(url, { name, email, password });
-    console.log(response);
+    if (verifyUser()) {
+      try {
+        await axios.post(url, { name, email, password });
+
+        navigate('/login');
+      } catch (error) {
+        alert('Usuário já existente');
+      }
+    }
   };
 
   return (
