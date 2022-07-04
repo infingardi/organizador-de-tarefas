@@ -1,18 +1,19 @@
-// bibliotecas
+// Importações
 const express = require('express');
-const connection = require('./src/models/connection');
 require('dotenv').config();
 
-// iniciando o express
+const router = require('./src/routes');
+
+// Iniciando o express
 const app = express();
 app.use(express.json());
-// selecionando a porta que ira rodar
+
+// Iniciando as rotas
+app.use(router.taskRouter);
+app.use(router.userRouter);
+
+// Selecionando a porta que ira rodar
 const PORT = process.env.PORT || 3333;
 
-app.get('/', async (req, res) => {
-  const [response] = await connection.execute('SELECT * FROM OrganizadorDeTarefas.users');
-  res.send(response);
-});
-
-// abrindo a porta para receber chamadas
+// Abrindo a porta para receber chamadas
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
