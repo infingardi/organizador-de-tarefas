@@ -1,4 +1,5 @@
 const taskModel = require('../models/taskModel');
+const { verifyParametersCreateTask } = require('../utils/verifiers');
 
 const getAllTasks = async (userId) => {
   const tasks = await taskModel.getAllTasks(userId);
@@ -13,12 +14,16 @@ const getTaskById = async (id) => {
 };
 
 const createTask = async ({ userId, title, statusId }) => {
+  verifyParametersCreateTask({ title, statusId });
+
   const task = await taskModel.createTask({ userId, title, statusId });
 
   return task;
 };
 
 const updateTask = async ({ id, title, statusId }) => {
+  verifyParametersCreateTask({ title, statusId });
+
   const task = await taskModel.updateTask({ id, title, statusId });
 
   return task;

@@ -1,4 +1,5 @@
 const userService = require('../services/userService');
+const { getError } = require('../utils/handleErro');
 
 const createUser = async (req, res) => {
   try {
@@ -7,7 +8,7 @@ const createUser = async (req, res) => {
 
     return res.status(201).json(user);
   } catch (error) {
-    return res.status(400).send(error.message);
+    return getError(error, res);
   }
 };
 
@@ -18,7 +19,7 @@ const loginUser = async (req, res) => {
 
     return res.status(200).json(user);
   } catch (error) {
-    return res.status(400).send(error.message);
+    return getError(error, res);
   }
 };
 

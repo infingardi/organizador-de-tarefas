@@ -1,4 +1,5 @@
 const taskService = require('../services/taskService');
+const { getError } = require('../utils/handleErro');
 
 const getAllTasks = async (req, res) => {
   try {
@@ -7,7 +8,7 @@ const getAllTasks = async (req, res) => {
 
     return res.status(200).json(tasks);
   } catch (error) {
-    return res.status(400).send(error.message);
+    return getError(error, res);
   }
 };
 
@@ -18,7 +19,7 @@ const getTaskById = async (req, res) => {
 
     return res.status(200).json(task);
   } catch (error) {
-    return res.status(400).send(error.message);
+    return getError(error, res);
   }
 };
 
@@ -29,7 +30,7 @@ const createTask = async (req, res) => {
 
     return res.status(201).json(task);
   } catch (error) {
-    return res.status(400).send(error.message);
+    return getError(error, res);
   }
 };
 
@@ -40,7 +41,7 @@ const updateTask = async (req, res) => {
 
     return res.status(200).json(task);
   } catch (error) {
-    return res.status(400).send(error.message);
+    return getError(error, res);
   }
 };
 
@@ -51,7 +52,7 @@ const deleteTask = async (req, res) => {
 
     return res.status(204).json(task);
   } catch (error) {
-    return res.status(400).send(error.message);
+    return getError(error, res);
   }
 };
 
