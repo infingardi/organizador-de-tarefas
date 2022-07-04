@@ -3,7 +3,7 @@ const { getError } = require('../utils/handleErro');
 
 const getAllTasks = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.params;
     const tasks = await taskService.getAllTasks(userId);
 
     return res.status(200).json(tasks);
