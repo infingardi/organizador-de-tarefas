@@ -10,7 +10,8 @@ const createUser = async ({ name, password, email }) => {
 };
 
 const loginUser = async ({ email, password }) => {
-  verifyParametersLoginUser(email, password);
+  console.log(email);
+  verifyParametersLoginUser({ email, password });
 
   const user = await userModel.loginUser({ email, password });
 

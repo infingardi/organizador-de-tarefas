@@ -9,7 +9,7 @@ const verifyName = (name) => {
 
 // eslint-disable-next-line consistent-return
 const verifyEmail = (email) => {
-  if (!email) return sendError(400, '"email" is required');
+  if (!email) return sendError(400, `"email" is required ${email}`);
   const validEmail = email.includes('@') && email.includes('.com');
   if (!validEmail) return sendError(400, '"email" must be a valid email');
 };
