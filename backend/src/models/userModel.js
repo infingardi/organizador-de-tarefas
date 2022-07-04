@@ -1,5 +1,6 @@
 const connection = require('./connection');
 const generateToken = require('../utils/generateToken');
+const { sendError } = require('../utils/handleErro');
 
 const verifyUserExists = async (email) => {
   const [response] = await connection
@@ -10,7 +11,7 @@ const verifyUserExists = async (email) => {
 
 const createUser = async ({ name, password, email }) => {
   const user = await verifyUserExists(email);
-  if (user.length !== 0) throw new Error('este email já está em uso');
+  if (user.length !== 0) return sendError(400, 'Este email já está em uso');
 
   const [response] = await connection
     .execute(`INSERT INTO OrganizadorDeTarefas.users (name, password, email)
@@ -24,8 +25,9 @@ const createUser = async ({ name, password, email }) => {
 const loginUser = async ({ email, password }) => {
   const [user] = await verifyUserExists(email);
 
-  if (user.length === 0) throw new Error('senha ou email incorreto');
-  if (user.password !== password) throw new Error('senha ou email incorreto');
+  // Verifica se email e senha estão corretos
+  if (user.length === 0) return sendError(400, 'Senha ou email incorreto');
+  if (user.password !== password) return sendError(400, 'Senha ou email incorreto');
 
   // Gera token sem a chave password
   delete user.password;
