@@ -1,14 +1,18 @@
 import React from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-const Routes = () => {
-  return(
+import Signup from '../pages/signup';
+
+function PageRoutes() {
+  return (
     <BrowserRouter>
-      <Route component={} path={'/'} exact />
-      <Route component={} path={'/signup'} exact />
-      <Route component={} path={'/login'} exact />
+      <Routes>
+        <Route element={<Signup />} path="/" exact />
+        <Route element={<Signup />} path="/signup" exact />
+        <Route element={<Signup />} path="/login" exact />
+      </Routes>
     </BrowserRouter>
   );
 }
 
-export default Routes;
+export default PageRoutes;
