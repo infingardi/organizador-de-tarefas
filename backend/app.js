@@ -10,6 +10,7 @@ app.use(express.json());
 
 // Iniciando as rotas
 app.use(router.taskRouter);
+app.use(router.userRouter);
 
 // Selecionando a porta que ira rodar
 const PORT = process.env.PORT || 3333;

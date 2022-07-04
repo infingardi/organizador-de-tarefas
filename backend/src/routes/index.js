@@ -1,3 +1,4 @@
 const taskRouter = require('./taskRouter');
+const userRouter = require('./userRouter');
 
-module.exports = { taskRouter };
+module.exports = { taskRouter, userRouter };
